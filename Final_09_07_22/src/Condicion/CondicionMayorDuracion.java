@@ -1,5 +1,7 @@
 package Condicion;
 
+import appMusica.Pista;
+
 public class CondicionMayorDuracion extends Condicion{
     private double duracion;
 

@@ -1,5 +1,7 @@
 package Condicion;
 
+import appMusica.Pista;
+
 public class CondicionAnio extends Condicion{
     private int anio;
 

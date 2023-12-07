@@ -3,7 +3,6 @@ package appMusica;
 import Condicion.Condicion;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 public class Pista extends  SistemaDeAdministracion{
     private int id;
@@ -13,8 +12,10 @@ public class Pista extends  SistemaDeAdministracion{
     private String tituloAlbum;
     private int anio;
     private String genero;
+    private boolean esPromocionada;
+    private boolean esParaTodos;
 
-    public Pista(int id, String titulo, double duracion, String artista, String tituloAlbum, int anio, String genero) {
+    public Pista(int id, String titulo, double duracion, String artista, String tituloAlbum, int anio, String genero, boolean esPromocionada, boolean esParaTodos) {
         this.id = id;
         this.titulo = titulo;
         this.duracion = duracion;
@@ -22,11 +23,18 @@ public class Pista extends  SistemaDeAdministracion{
         this.tituloAlbum = tituloAlbum;
         this.anio = anio;
         this.genero = genero;
+        this.esPromocionada= esPromocionada;
+        this.esParaTodos = esParaTodos;
     }
 
     @Override
     public ArrayList<Pista> buscar(Condicion c) {
         ArrayList<Pista>salida = new ArrayList<>();
+        //Si es una pista para todos
+        if (esParaTodos && c.cumple(this)) {
+            salida.add(this);
+        }
+        //resto de la busquedas
         if(c.cumple(this)){
             salida.add(this);
         }
@@ -44,7 +52,8 @@ public class Pista extends  SistemaDeAdministracion{
     @Override
     public SistemaDeAdministracion getCopia(Condicion c) {
         if(cumpleCriterio(c)){
-            SistemaDeAdministracion copia= new Pista(this.getId(), this.getTitulo(), this.getDuracion(), this.getArtista(), this.getTituloAlbum(), this.getAnio(), this.getGenero());
+            SistemaDeAdministracion copia= new Pista(this.getId(), this.getTitulo(), this.getDuracion(), this.getArtista(), this.getTituloAlbum(),
+                    this.getAnio(), this.getGenero(), this.esPromocionada, this.esParaTodos);
             return copia;
         }
         return null;
@@ -100,5 +109,21 @@ public class Pista extends  SistemaDeAdministracion{
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public boolean isEsPromocionada() {
+        return esPromocionada;
+    }
+
+    public void setEsPromocionada(boolean esPromocionada) {
+        this.esPromocionada = esPromocionada;
+    }
+
+    public boolean isEsParaTodos() {
+        return esParaTodos;
+    }
+
+    public void setEsParaTodos(boolean esParaTodos) {
+        this.esParaTodos = esParaTodos;
     }
 }

@@ -11,7 +11,7 @@ public abstract class SistemaDeAdministracion {
         this.listaDeReproduccion = new ArrayList<>();
     }
     public void addPlayList(PlayList lista){
-        if(listaDeReproduccion.contains(lista)){
+        if(!listaDeReproduccion.contains(lista)){
             listaDeReproduccion.add(lista);
         }
     }
@@ -22,5 +22,4 @@ public abstract class SistemaDeAdministracion {
     public abstract ArrayList<Pista>buscar(Condicion c);
     public abstract double getDuracion();
     public abstract SistemaDeAdministracion getCopia(Condicion c);
-
 }
